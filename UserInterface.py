@@ -48,6 +48,7 @@ class Window(QtWidgets.QMainWindow):
 
         """Fonction appelée quand on appuie sur le bouton GO"""
         def bouton_GO_pushed():
+            self.pushButton_GO.setEnabled(False)
             # Verification de la présence de tous les paramètres requis. Sinon, message d'erreur.
             if self.fileSelected is False or self.textEdit_nbr_mots.text() == "" or self.textEdit_paragraphe.text() == "":
                 error_dialog = QtWidgets.QErrorMessage()
@@ -260,6 +261,9 @@ class Window(QtWidgets.QMainWindow):
 
         self.textEdit_nbr_mots.setText("100")
         self.textEdit_paragraphe.setText("10")
+        self.listWidget_mots_suivants.setEnabled(False)
+        self.listView_mots_premiers.setEnabled(False)
+        self.textEdit_mot_en_cours.setEnabled(False)
 
         # Callback déclenché à la reception du signal. Le thread de travail envoit un "tuple". Un couple de 2 valeurs:
         # - La première valeur (data[0]) est un string décrivant l'action requise
@@ -288,6 +292,8 @@ class Window(QtWidgets.QMainWindow):
                     self.progressBar.setValue(100)
                 else:
                     self.progressBar.setValue(data[1]*100)
+            if data[0] == "end":
+                self.pushButton_GO.setEnabled(True)
 
 
 # Instructions obligatoires pour lancer le thread principal (thread de l'UI)

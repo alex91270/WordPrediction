@@ -125,7 +125,7 @@ def getNumberOfOccurencesForWord(myText: str, word: str):
 # Renvoit un dictionnaire de tous les mots avec leur fréquence d'apparition
 def createDictionnaryOfWordsWithOccurences():
     thisDict = {str: int}
-    list0fAllWords = findAllWords()
+    list0fAllWords = findAllWords('')
 
     for word in list0fAllWords:
         number = getNumberOfOccurencesForWord(word)

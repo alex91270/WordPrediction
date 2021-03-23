@@ -39,6 +39,7 @@ class WorkingThread(QtCore.QThread):  # Thread de type QThread pour pouvoir comm
             if self.nbr_mots_paragraphe > self.taille_paragraphe:  # Si la taille d'un paragraphe est atteinte
                 self.nbr_mots_paragraphe = 0  # on remet le compteur paragraphe à zéro
                 self.sendToGUI("addOutput", "\n\n   ")  # et on envoit à l'UI 2 retours a la ligne et des espaces
+        self.sendToGUI("end", "")
         self._stop.set()  # a la fin on stoppe le thread
 
     def loadSourceStr(self):
